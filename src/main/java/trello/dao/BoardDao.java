@@ -5,6 +5,6 @@ import trello.model.Board;
 public interface BoardDao {
 	
 	public void saveBoard(Board board);
-	public String getBoard(Long userId);
+	public Board getBoard(Long userId);
 
 }

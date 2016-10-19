@@ -11,10 +11,10 @@ import javax.persistence.TypedQuery;
 import trello.model.Board;
 import trello.model.List;
 import trello.utils.ConnectionUtil;
-public class HibernateBoardDao {
+public class HibernateBoardDao implements BoardDao{
 
 	
-	
+	@Override
 	public void saveBoard(Board board)
 	{
 		EntityManager em=ConnectionUtil.getEntityManagerFactory().createEntityManager();
@@ -33,7 +33,7 @@ public class HibernateBoardDao {
 	
 	}
 	
-	
+	@Override
 	public Board getBoard(Long id)
 	{Board board=null;
 		EntityManager em=ConnectionUtil.getEntityManagerFactory().createEntityManager();
