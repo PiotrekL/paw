@@ -15,6 +15,8 @@
     <artifactId>hibernate-entitymanager</artifactId>
     <version>5.1.0.Final</version>
 </dependency>
+
+
 <dependency>
 	<groupId>com.sun.jersey</groupId>
 	<artifactId>jersey-json</artifactId>

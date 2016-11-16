@@ -4,10 +4,12 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 @Entity(name="trello_user")
@@ -49,4 +51,15 @@ public class User {
 	@OneToMany
 	@JoinColumn(name = "id_user")
 	private Set<Board> boards ;
+	
+private Set<Team> teams;
+
+
+@ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+public Set<Team> getTeams() {
+	return teams;
+}
+public void setTeams(Set<Team> teams) {
+	this.teams = teams;
+}
 }

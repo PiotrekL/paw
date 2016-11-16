@@ -15,6 +15,8 @@ public class Card {
 	private long id;
 	@Column(nullable = false)
 	private String name;
+	@Column(nullable = false)
+	private long placeOnTheList;
 
 	public long getId() {
 		return id;
@@ -30,5 +32,13 @@ public class Card {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public long getPlaceOnTheList() {
+		return placeOnTheList;
+	}
+
+	public void setPlaceOnTheList(long placeOnTheList) {
+		this.placeOnTheList = placeOnTheList;
 	}
 }

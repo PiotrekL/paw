@@ -1,8 +1,5 @@
 package trello.model;
 
-import java.sql.Blob;
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,46 +8,35 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-
+import java.sql.Blob;
+import java.util.Set;
 @Entity
-public class Board {
+public class Attachment {
 	@Id
-	@SequenceGenerator(name = "board_seq", sequenceName = "board_seq", allocationSize = 1, initialValue = 1)
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "board_seq")
+	@SequenceGenerator(name = "attach_seq", sequenceName = "attach_seq", allocationSize = 1, initialValue = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attach_seq")
 	private long id;
 	@Column(nullable = false)
 	private String name;
-	@OneToMany
-	@JoinColumn(name = "id_board")
-	private Set<List> lists;
-	@OneToMany
-	@JoinColumn(name = "id_board")
-	private Set<Activity> activities;
-	@OneToMany
-	@JoinColumn(name = "id_board")
-	private Set<Blob> blobs;
+	@Column(nullable = false)
+	private Blob blob;
 	public long getId() {
 		return id;
 	}
-
 	public void setId(long id) {
 		this.id = id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public Set<List> getLists() {
-		return lists;
+	public Blob getBlob() {
+		return blob;
 	}
-
-	public void setLists(Set<List> lists) {
-		this.lists = lists;
+	public void setBlob(Blob blob) {
+		this.blob = blob;
 	}
 
 }

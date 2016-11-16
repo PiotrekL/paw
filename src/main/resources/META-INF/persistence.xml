@@ -13,7 +13,7 @@
          <property name="javax.persistence.jdbc.password" value="trello"/>
          <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
          <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
-
+		<property name="hibernate.hbm2ddl.auto" value="update"/>
       </properties>
                </persistence-unit>
              </persistence>

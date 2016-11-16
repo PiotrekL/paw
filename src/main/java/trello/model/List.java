@@ -23,6 +23,9 @@ public class List {
 	@JoinColumn(name = "id_list")
 	private Set<Card> cards;
 
+	@Column(nullable = false)
+	private boolean archived;
+	
 	public long getId() {
 		return id;
 	}
@@ -45,5 +48,13 @@ public class List {
 
 	public void setCards(Set<Card> cards) {
 		this.cards = cards;
+	}
+
+	public boolean isArchived() {
+		return archived;
+	}
+
+	public void setArchived(boolean archived) {
+		this.archived = archived;
 	}
 }

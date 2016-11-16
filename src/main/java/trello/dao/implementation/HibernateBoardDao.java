@@ -11,7 +11,6 @@ import javax.persistence.TypedQuery;
 
 import trello.dao.BoardDao;
 import trello.model.Board;
-import trello.model.List;
 import trello.utils.ConnectionUtil;
 public class HibernateBoardDao implements BoardDao{
 
@@ -43,7 +42,7 @@ public class HibernateBoardDao implements BoardDao{
 		try {
 			em.getTransaction().begin();
 			
-			TypedQuery<Board> query= em.createQuery(" from Board  where id=:id", Board.class);
+			TypedQuery<Board> query= em.createQuery(" from BOARD  where id_user=:id", Board.class);
 			query.setParameter("id",  userId);
 			
 		 boards= new HashSet<Board>(query.getResultList());
@@ -81,7 +80,7 @@ public class HibernateBoardDao implements BoardDao{
 			em.getTransaction().rollback();
 			
 		} catch (PersistenceException e) {
-			em.getTransaction().rollback();
+			
 			
 		} finally {
 

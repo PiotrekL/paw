@@ -39,7 +39,7 @@ User user=null;
 
 		try {
 			em.getTransaction().begin();
-			TypedQuery<User> query= em.createQuery(" from trello_user  where login=:login", User.class);
+			TypedQuery<User> query= em.createQuery(" from TRELLO_USER  where login=:login", User.class);
 			query.setParameter("login",  login);
 			 user=query.getSingleResult();
 			em.getTransaction().commit();
