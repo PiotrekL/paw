@@ -23,7 +23,7 @@ public class BoardService {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Path("/getBoard/{userId}")
+	@Path("/getBoardByUser/{userId}")
 	public Set<Board> getBoardByUser(@PathParam("userId") long id) {
 		Set<Board> boards;
 		boards = boardDao.getBoardsByUser(id);
@@ -31,6 +31,19 @@ public class BoardService {
 
 	}
 
+	
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/getBoard/{id}")
+	public Board getBoard(@PathParam("id") long id) {
+	Board board;
+		board = boardDao.getBoard(id);
+		return board;
+
+	}
+	
+	
+	
 	@POST
 	@Path("/createBoard")
 	@Consumes(MediaType.APPLICATION_JSON)

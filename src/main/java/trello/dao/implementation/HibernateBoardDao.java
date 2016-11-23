@@ -66,6 +66,40 @@ public class HibernateBoardDao implements BoardDao{
 	
 	
 
+	@Override
+	public Board getBoard(Long id){
+		Board board=null;
+		EntityManager em=ConnectionUtil.getEntityManagerFactory().createEntityManager();
+		
+		try {
+			em.getTransaction().begin();
+			
+			TypedQuery<Board> query= em.createQuery(" from Board  where id=:id", Board.class);
+			query.setParameter("id",  id);
+			
+		 board= query.getSingleResult();
+			
+		} 
+		
+		catch(NoResultException e){
+			return null;
+			
+			
+		}
+		catch (PersistenceException e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+		
+		return board;
+	}
+	
+	
+	
+	
+	
 	public void deleteBoard(Long boardId)  {
 		EntityManager em = ConnectionUtil.getEntityManagerFactory().createEntityManager();
 		try {
