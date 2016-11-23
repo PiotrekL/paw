@@ -3,6 +3,7 @@ package trello.model;
 import java.util.Set;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,6 +23,20 @@ public class User {
 	private long id;
 	@Column(nullable = false, unique=true)
 	private String login;
+	@Column(nullable = false)
+	private String password;
+	 @ElementCollection(targetClass=Board.class)
+	private Set<Board> sharedBoards ;
+	 @ElementCollection(targetClass=Team.class)
+	private Set<Team> teams;
+		@OneToMany
+		@JoinColumn(name = "id_user")
+		private Set<Board> boards;
+	
+	
+	
+	
+	
 	public long getId() {
 		return id;
 	}
@@ -40,26 +55,30 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Set<Board> getBoards() {
-		return boards;
+
+@ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+	public Set<Board> getSharedBoards() {
+		return sharedBoards;
 	}
-	public void setBoards(Set<Board> boards) {
-		this.boards = boards;
+	public void setSharedBoards(Set<Board> boards) {
+		this.sharedBoards = boards;
 	}
-	@Column(nullable = false)
-	private String password;
-	@OneToMany
-	@JoinColumn(name = "id_user")
-	private Set<Board> boards ;
-	
-private Set<Team> teams;
+
+
 
 
 @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
 public Set<Team> getTeams() {
 	return teams;
 }
+
 public void setTeams(Set<Team> teams) {
 	this.teams = teams;
+}
+public Set<Board> getBoards() {
+	return boards;
+}
+public void setBoards(Set<Board> boards) {
+	this.boards = boards;
 }
 }

@@ -4,6 +4,8 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,7 +15,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
-
+@Entity
 public class Team {
 
 	@Id
@@ -22,8 +24,8 @@ public class Team {
 	private long id;
 	@Column(nullable = false)
 	private String name;
-	private Set<List> lists;
-
+	 @ElementCollection(targetClass=User.class)
+	private Set<User> users;
 	public long getId() {
 		return id;
 	}
@@ -40,15 +42,16 @@ public class Team {
 		this.name = name;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "user_team", joinColumns = {
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinTable(name = "trello_user_team", joinColumns = {
 			@JoinColumn(name = "TEAM_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "USER_ID", nullable = false, updatable = false) })
-	public Set<List> getLists() {
-		return lists;
+	public Set<User> getUsers() {
+		return users;
 	}
 
-	public void setLists(Set<List> lists) {
-		this.lists = lists;
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
+
 }

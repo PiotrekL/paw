@@ -19,6 +19,10 @@ public class List {
 	private long id;
 	@Column(nullable = false)
 	private String name;
+	@Column(nullable = false)
+	private boolean favourite;
+	@Column(nullable = false)
+	private int position;
 	@OneToMany
 	@JoinColumn(name = "id_list")
 	private Set<Card> cards;
@@ -56,5 +60,21 @@ public class List {
 
 	public void setArchived(boolean archived) {
 		this.archived = archived;
+	}
+
+	public boolean isFavourite() {
+		return favourite;
+	}
+
+	public void setFavourite(boolean favourite) {
+		this.favourite = favourite;
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public void setPosition(int position) {
+		this.position = position;
 	}
 }

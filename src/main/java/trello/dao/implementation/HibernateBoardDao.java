@@ -42,7 +42,7 @@ public class HibernateBoardDao implements BoardDao{
 		try {
 			em.getTransaction().begin();
 			
-			TypedQuery<Board> query= em.createQuery(" from BOARD  where id_user=:id", Board.class);
+			TypedQuery<Board> query= em.createQuery(" from Board  where id_user=:id", Board.class);
 			query.setParameter("id",  userId);
 			
 		 boards= new HashSet<Board>(query.getResultList());

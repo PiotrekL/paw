@@ -19,7 +19,7 @@ public class Attachment {
 	@Column(nullable = false)
 	private String name;
 	@Column(nullable = false)
-	private Blob blob;
+	private String path;
 	public long getId() {
 		return id;
 	}
@@ -32,11 +32,11 @@ public class Attachment {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Blob getBlob() {
-		return blob;
+	public String getPath() {
+		return path;
 	}
-	public void setBlob(Blob blob) {
-		this.blob = blob;
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 }
