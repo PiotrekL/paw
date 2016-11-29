@@ -47,6 +47,7 @@ public class BoardService {
 	@POST
 	@Path("/createBoard")
 	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
 	public Response createBoard(Board board) {
 		boardDao.saveBoard(board);
 		return Response.status(201).entity("ok").build();

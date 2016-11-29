@@ -24,17 +24,12 @@ public class HibernateColorsDao implements ColorsDao {
 		try {
 			em.getTransaction().begin();
 			
-			TypedQuery<Color> query= em.createQuery(" from CARD" , Color.class);
+			TypedQuery<Color> query= em.createQuery(" from Colors" , Color.class);
 			
 		 colors= new HashSet<Color>(query.getResultList());
 			
 		} 
 		
-		catch(NoResultException e){
-			return null;
-			
-			
-		}
 		catch (PersistenceException e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();

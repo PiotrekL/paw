@@ -17,7 +17,7 @@ public class ColorService {
 	ColorsDao colorsDao= new HibernateColorsDao();
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Set<Color> getBoardByUser() {
+	public Set<Color> getColors() {
 		Set<Color> colors;
 		colors = colorsDao.getColors();
 		return colors;

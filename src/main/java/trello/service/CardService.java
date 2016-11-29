@@ -26,7 +26,7 @@ public class CardService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getCard/{listId}")
-	public Set<Card> getBoardByUser(@PathParam("listId") long id) {
+	public Set<Card> getCard(@PathParam("listId") long id) {
 		Set<Card> cards;
 		cards = cardDao.getCards(id);
 		return cards;
@@ -36,7 +36,7 @@ public class CardService {
 	@POST
 	@Path("/createCard")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createBoard(Card card) {
+	public Response createCard(Card card) {
 		cardDao.saveCard(card);
 		return Response.status(201).entity("ok").build();
 
@@ -45,7 +45,7 @@ public class CardService {
 	@PUT
 	@Path("/updateCard")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response updateBoard(Card card) {
+	public Response updateCard(Card card) {
 		cardDao.updateCard(card);
 		return Response.status(204).entity("ok").build();
 
@@ -53,7 +53,7 @@ public class CardService {
 
 	@DELETE
 	@Path("/deleteCard/{id}")
-	public Response deleteBoard(@PathParam("id") long id) {
+	public Response deleteCard(@PathParam("id") long id) {
 		cardDao.deleteCard(id);
 		return Response.status(204).entity("ok").build();
 

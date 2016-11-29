@@ -24,7 +24,7 @@ public class LabelService {
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/getLabels/{cardId}")
-	public Set<Label> getBoardByUser(@PathParam("cardId") long id) {
+	public Set<Label> getLabels(@PathParam("cardId") long id) {
 		Set<Label> labels;
 		labels = labelDao.getLabel(id);
 		return labels;

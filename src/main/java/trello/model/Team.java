@@ -24,7 +24,7 @@ public class Team {
 	private long id;
 	@Column(nullable = false)
 	private String name;
-	 @ElementCollection(targetClass=User.class)
+	@ElementCollection(targetClass=User.class)
 	private Set<User> users;
 	public long getId() {
 		return id;

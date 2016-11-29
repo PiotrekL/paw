@@ -17,38 +17,33 @@ public class HibernateLabelDao implements LabelDao {
 
 	@Override
 	public Set<Label> getLabel(Long boardId) {
-		Set<Label> labels=null;
-		EntityManager em=ConnectionUtil.getEntityManagerFactory().createEntityManager();
-		
+		Set<Label> labels = null;
+		EntityManager em = ConnectionUtil.getEntityManagerFactory().createEntityManager();
+
 		try {
 			em.getTransaction().begin();
-			
-			TypedQuery<Label> query= em.createQuery(" from LABEL  where id_board=:id", Label.class);
-			query.setParameter("id",  boardId);
-			
-		 labels= new HashSet<Label>(query.getResultList());
-			
-		} 
-		
-		catch(NoResultException e){
-			return null;
-			
-			
+
+			TypedQuery<Label> query = em.createQuery(" from Label  where id_board=:id", Label.class);
+			query.setParameter("id", boardId);
+
+			labels = new HashSet<Label>(query.getResultList());
+
 		}
+
 		catch (PersistenceException e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();
 		} finally {
 			em.close();
 		}
-		
-return labels;
+
+		return labels;
 	}
 
 	@Override
 	public void saveLabel(Label label) {
-		EntityManager em=ConnectionUtil.getEntityManagerFactory().createEntityManager();
-		
+		EntityManager em = ConnectionUtil.getEntityManagerFactory().createEntityManager();
+
 		try {
 			em.getTransaction().begin();
 			em.persist(label);
@@ -73,18 +68,14 @@ return labels;
 
 		}
 
-		catch (NullPointerException e) {
+		catch (PersistenceException e) {
 			em.getTransaction().rollback();
-			
-		} catch (PersistenceException e) {
-			
-			
+
 		} finally {
 
 			em.close();
 		}
 
 	}
-
 
 }

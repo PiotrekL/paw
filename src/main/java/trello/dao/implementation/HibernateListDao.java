@@ -24,18 +24,14 @@ public class HibernateListDao implements ListDao {
 			try {
 				em.getTransaction().begin();
 				
-				TypedQuery<List> query= em.createQuery(" from LIST  where id_board=:id", List.class);
+				TypedQuery<List> query= em.createQuery(" from List  where id_board=:id", List.class);
 				query.setParameter("id",  boardId);
 				
 			 lists= new HashSet<List>(query.getResultList());
 				
 			} 
 			
-			catch(NoResultException e){
-				return null;
-				
-				
-			}
+
 			catch (PersistenceException e) {
 				em.getTransaction().rollback();
 				e.printStackTrace();
@@ -74,11 +70,8 @@ public class HibernateListDao implements ListDao {
 
 		}
 
-		catch (NullPointerException e) {
+ catch (PersistenceException e) {
 			em.getTransaction().rollback();
-			
-		} catch (PersistenceException e) {
-			
 			
 		} finally {
 
@@ -95,10 +88,7 @@ public class HibernateListDao implements ListDao {
 
 		}
 
-		catch (NullPointerException e) {
-			em.getTransaction().rollback();
-			
-		} catch (PersistenceException e) {
+	 catch (PersistenceException e) {
 			em.getTransaction().rollback();
 			
 		} finally {

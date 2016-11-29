@@ -21,7 +21,6 @@ public class Card {
 	private String name;
 	@Column(nullable = false)
 	private boolean archived;
-
 	@Column(nullable = false)
 	private int position;
 	@Column
@@ -35,6 +34,7 @@ public class Card {
 	@OneToMany
 	@JoinColumn(name = "id_card")
 	private Set<Attachment> attachments;
+
 	public long getId() {
 		return id;
 	}
@@ -51,7 +51,6 @@ public class Card {
 		this.name = name;
 	}
 
-
 	public boolean isArchived() {
 		return archived;
 	}
@@ -59,8 +58,6 @@ public class Card {
 	public void setArchived(boolean archived) {
 		this.archived = archived;
 	}
-
-
 
 	public int getPosition() {
 		return position;
