@@ -7,7 +7,7 @@ import trello.model.List;
 
 public interface ListDao {
 	public Set<List> getLists(Long boardId);
-	public void saveList(List list);
+	public long saveList(List list);
 	public void deleteList(Long listId);
 	public void updateList(List list);
 	

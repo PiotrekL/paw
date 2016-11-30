@@ -41,7 +41,7 @@ public class HibernateLabelDao implements LabelDao {
 	}
 
 	@Override
-	public void saveLabel(Label label) {
+	public long saveLabel(Label label) {
 		EntityManager em = ConnectionUtil.getEntityManagerFactory().createEntityManager();
 
 		try {
@@ -54,7 +54,7 @@ public class HibernateLabelDao implements LabelDao {
 		} finally {
 			em.close();
 		}
-
+		return label.getId();
 	}
 
 	@Override

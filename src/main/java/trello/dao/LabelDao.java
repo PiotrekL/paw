@@ -8,7 +8,7 @@ import trello.model.Label;
 public interface LabelDao {
 
 	Set<Label> getLabel(Long boardId);
-	public void saveLabel(Label label);
+	public long saveLabel(Label label);
 	public void deleteLabel(Long labelId);
 	
 	

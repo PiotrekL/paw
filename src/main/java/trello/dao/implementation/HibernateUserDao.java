@@ -1,6 +1,7 @@
 package trello.dao.implementation;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 
@@ -12,7 +13,7 @@ import trello.utils.SecureUtil;
 
 public class HibernateUserDao implements UserDao {
 
-	public void saveUser(User user) {
+	public long saveUser(User user) {
 		EntityManager em = ConnectionUtil.getEntityManagerFactory().createEntityManager();
 
 		try {
@@ -26,7 +27,7 @@ public class HibernateUserDao implements UserDao {
 		} finally {
 			em.close();
 		}
-
+		return user.getId();
 	}
 
 	public User getUser(String login) {
@@ -47,6 +48,31 @@ public class HibernateUserDao implements UserDao {
 		}
 
 		return user;
+
+	}
+
+	public String checkUser(String login) {
+		EntityManager em = ConnectionUtil.getEntityManagerFactory().createEntityManager();
+		String pass = null;
+
+		try {
+			em.getTransaction().begin();
+			TypedQuery<String> query = em.createQuery("SELECT password from trello_user  where login=:login",
+					String.class);
+			query.setParameter("login", login);
+			pass = query.getSingleResult();
+			em.getTransaction().commit();
+		} catch (NoResultException nre) {
+
+			return null;
+		} catch (PersistenceException e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+
+		return pass;
 
 	}
 

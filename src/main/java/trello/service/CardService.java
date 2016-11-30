@@ -37,8 +37,8 @@ public class CardService {
 	@Path("/createCard")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createCard(Card card) {
-		cardDao.saveCard(card);
-		return Response.status(201).entity("ok").build();
+		Long id=cardDao.saveCard(card);
+		return Response.status(201).entity(id.toString()).build();
 
 	}
 

@@ -36,8 +36,8 @@ public class LabelService {
 	@Path("/createLabel")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createList(Label label) {
-		labelDao.saveLabel(label);
-		return Response.status(201).entity("ok").build();
+		Long id=labelDao.saveLabel(label);
+		return Response.status(201).entity(id.toString()).build();
 
 	}
 

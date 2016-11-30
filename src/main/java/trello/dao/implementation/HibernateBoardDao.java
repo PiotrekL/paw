@@ -15,7 +15,7 @@ import trello.utils.ConnectionUtil;
 public class HibernateBoardDao implements BoardDao {
 
 	@Override
-	public void saveBoard(Board board) {
+	public long saveBoard(Board board) {
 		EntityManager em = ConnectionUtil.getEntityManagerFactory().createEntityManager();
 
 		try {
@@ -26,10 +26,11 @@ public class HibernateBoardDao implements BoardDao {
 		} catch (PersistenceException e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();
+
 		} finally {
 			em.close();
 		}
-
+		return board.getId();
 	}
 
 	@Override

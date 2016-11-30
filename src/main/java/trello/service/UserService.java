@@ -1,6 +1,7 @@
 package trello.service;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -13,7 +14,7 @@ import trello.dao.UserDao;
 import trello.dao.implementation.HibernateUserDao;
 import trello.model.Board;
 import trello.model.User;
-
+import trello.controller.LoginController;
 @Path("/users")
 public class UserService {
 	UserDao userDao = new HibernateUserDao();
@@ -28,10 +29,24 @@ public class UserService {
 
 	@POST
 	@Path("/createUser")
-	@Consumes(MediaType.APPLICATION_JSON)
-	public Response createBoard(User user) {
-		userDao.saveUser(user);
-		return Response.status(201).entity("ok").build();
+	public Response createUser(@FormParam("login") String login, @FormParam("password") String password){
+		User user= new User();
+		user.setLogin(login);
+		user.setPassword(password);
+		Long id=userDao.saveUser(user);
+		return Response.status(201).entity(id.toString()).build();
+
+	}
+	
+	
+
+	@POST
+	@Path("/login")
+	public Response checkUser(@FormParam("login") String login, @FormParam("password") String password) {
+		LoginController lc= new LoginController();
+		Boolean result=lc.authenticateUser(login, password);
+		return Response.status(201).entity(result.toString()).build();
+		
 
 	}
 }

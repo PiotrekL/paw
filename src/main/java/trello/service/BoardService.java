@@ -49,8 +49,8 @@ public class BoardService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response createBoard(Board board) {
-		boardDao.saveBoard(board);
-		return Response.status(201).entity("ok").build();
+		Long id=boardDao.saveBoard(board);
+		return Response.status(201).entity(id.toString()).build();
 
 	}
 

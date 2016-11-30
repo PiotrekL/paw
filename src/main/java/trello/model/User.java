@@ -17,7 +17,7 @@ import javax.persistence.SequenceGenerator;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 @Entity(name = "trello_user")
-@JsonIgnoreProperties({ "boards", "login", "password", })
+@JsonIgnoreProperties({ "boards", "login", "password" })
 public class User {
 
 	@Id

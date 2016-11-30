@@ -38,8 +38,8 @@ public class ListService {
 	@Path("/createList")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response createList(List list) {
-		listDao.saveList(list);
-		return Response.status(201).entity("ok").build();
+		Long id=listDao.saveList(list);
+		return Response.status(201).entity(id.toString()).build();
 
 	}
 

@@ -40,7 +40,7 @@ public class HibernateCardDao implements CardDao {
 	}
 
 	@Override
-	public void saveCard(Card card) {
+	public long saveCard(Card card) {
 		EntityManager em = ConnectionUtil.getEntityManagerFactory().createEntityManager();
 
 		try {
@@ -53,6 +53,7 @@ public class HibernateCardDao implements CardDao {
 		} finally {
 			em.close();
 		}
+		return card.getId();
 	}
 
 	@Override

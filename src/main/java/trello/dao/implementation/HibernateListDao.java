@@ -14,37 +14,36 @@ import trello.model.List;
 import trello.utils.ConnectionUtil;
 
 public class HibernateListDao implements ListDao {
-	
-	@Override
-	public Set<List> getLists(Long boardId){
-	
-			Set<List> lists=null;
-			EntityManager em=ConnectionUtil.getEntityManagerFactory().createEntityManager();
-			
-			try {
-				em.getTransaction().begin();
-				
-				TypedQuery<List> query= em.createQuery(" from List  where id_board=:id", List.class);
-				query.setParameter("id",  boardId);
-				
-			 lists= new HashSet<List>(query.getResultList());
-				
-			} 
-			
 
-			catch (PersistenceException e) {
-				em.getTransaction().rollback();
-				e.printStackTrace();
-			} finally {
-				em.close();
-			}
-			
-	return lists;
+	@Override
+	public Set<List> getLists(Long boardId) {
+
+		Set<List> lists = null;
+		EntityManager em = ConnectionUtil.getEntityManagerFactory().createEntityManager();
+
+		try {
+			em.getTransaction().begin();
+
+			TypedQuery<List> query = em.createQuery(" from List  where id_board=:id", List.class);
+			query.setParameter("id", boardId);
+
+			lists = new HashSet<List>(query.getResultList());
+
+		}
+
+		catch (PersistenceException e) {
+			em.getTransaction().rollback();
+			e.printStackTrace();
+		} finally {
+			em.close();
+		}
+
+		return lists;
 	}
 
-	public void saveList(List list) {
-		EntityManager em=ConnectionUtil.getEntityManagerFactory().createEntityManager();
-	
+	public long saveList(List list) {
+		EntityManager em = ConnectionUtil.getEntityManagerFactory().createEntityManager();
+
 		try {
 			em.getTransaction().begin();
 			em.persist(list);
@@ -55,11 +54,10 @@ public class HibernateListDao implements ListDao {
 		} finally {
 			em.close();
 		}
-
+		return list.getId();
 	}
 
-
-@Override
+	@Override
 	public void deleteList(Long listId) {
 		EntityManager em = ConnectionUtil.getEntityManagerFactory().createEntityManager();
 		try {
@@ -70,15 +68,16 @@ public class HibernateListDao implements ListDao {
 
 		}
 
- catch (PersistenceException e) {
+		catch (PersistenceException e) {
 			em.getTransaction().rollback();
-			
+
 		} finally {
 
 			em.close();
 		}
 	}
-@Override
+
+	@Override
 	public void updateList(List list) {
 		EntityManager em = ConnectionUtil.getEntityManagerFactory().createEntityManager();
 		try {
@@ -88,14 +87,12 @@ public class HibernateListDao implements ListDao {
 
 		}
 
-	 catch (PersistenceException e) {
+		catch (PersistenceException e) {
 			em.getTransaction().rollback();
-			
+
 		} finally {
 
 			em.close();
 		}
 	}
-	}
-
-
+}
